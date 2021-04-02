@@ -1,0 +1,17 @@
+{% block _annonce_images_entry_row %}
+
+<div class="row" id="{{id}}">
+	<div class="col">
+		{{ form_row(form.url,{'label':false,'attr':{'placeholder':"url de l'image"}}) }}
+	</div>
+	<div class="col">
+		{{ form_row(form.caption,{'label':false,'attr':{'placeholder':"légende de l'image"}}) }}
+	</div>
+
+	<div class="col-2">
+	<button type="button" class="btn btn-danger del_image" data-bloc="{{id}}" >X</button>
+	</div>
+
+</div>
+
+{% endblock %}

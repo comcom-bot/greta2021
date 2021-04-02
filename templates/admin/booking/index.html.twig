@@ -1,0 +1,67 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Hello AdminBookingController!{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+	<table class="table table-danger">
+  <thead class="thead-dark ">
+    <tr>
+     
+      <th scope="col">Numéro réservation</th>
+      <th scope="col">Auteur</th>
+       <th scope="col">Numéro annonce</th>
+      <th scope="col">Date de début</th>
+       <th scope="col">Date de fin</th>
+       <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for booking in bookings %}
+<tr>
+     
+      <td>{{ booking.id }}</td>
+      <td>{{ booking.booker.firstName }}{{ booking.booker.lastName }}</td>
+      <td>{{ booking.ad.id }}</td>
+      <td>{{ booking.startDate | date("d/M/Y") }}</td>
+      <td>{{ booking.endDate | date("d/M/Y") }}</td>
+        <td> 
+        <a href="{{ path('admin_booking_show',{'id':booking.id})}}" class="btn btn-primary mr-4" data-toggle="tooltip" data-placement="bottom" title="Voir la réservation"><i class="fas fa-eye"></i></a>
+         <a href="" class="btn btn-primary mr-4" data-toggle="tooltip" data-placement="bottom" title="Modifier la réservation"><i class="fas fa-edit"></i></a>
+          <a href="{{ path('admin_booking_delete',{'id':booking.id})}}" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Supprimer la réservation"><i class="fas fa-trash"></i></a>
+      </td>
+    </tr>
+
+  {% endfor %}
+    
+    
+  </tbody>
+</table>
+<nav class="d-flex justify-content-center" aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link {% if page == 1 %}disabled{% endif %}" href="{{ path('admin_booking_index',{'page':page-1})}}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% for i in 1..pages%}
+    <li class="page-item {% if page == i %}active{% endif%}"><a class="page-link" href="{{ path('admin_booking_index',{'page':i})}}">{{i}}</a></li>
+   {% endfor %}
+    <li class="page-item {% if page == pages %}disabled{% endif %}">
+      <a class="page-link" href="{{ path('admin_booking_index',{'page':page+1})}}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+</div>
+{% endblock %}
+{% block javascripts %}
+  <script type="text/javascript">
+    $(function () {
+     $('[data-toggle="tooltip"]').tooltip()
+    });
+
+  </script>
+{% endblock %}

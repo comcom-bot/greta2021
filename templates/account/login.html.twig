@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccountController!{% endblock %}
+
+{% block body %}
+
+<h1>Connexion sur le site</h1>
+
+
+<div class="container">
+	
+
+{% if (hasError) %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Mauvais identifiant ou mot de passe</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
+
+<form method="post">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" name="_username" class="form-control" >
+
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" name="_password" class="form-control" >
+  </div>
+
+  <button type="submit" class="btn btn-primary">Se connecter</button>
+</form>
+</div>
+
+
+
+{% endblock %}

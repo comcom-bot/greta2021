@@ -1,0 +1,62 @@
+{% extends 'admin/base.html.twig' %}
+
+{% set difference = date(booking.endDate).diff(date(booking.startDate)) %}
+{% set NumberDays = difference.days %}
+
+{% block title %}Hello AdController!{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+	<h1>Réservation n° {{booking.id}}</h1>
+	<div class="row">
+		
+		<div class="col">
+
+		<div class="alert alert-light">
+			<ul class="list-group">
+				  <li class="list-group-item">Numéro: {{booking.id}}</li>
+				  <li class="list-group-item">Date d'arrivée: {{booking.startDate | date("d/m/Y")}}</li>
+				  <li class="list-group-item">Date de départ: {{booking.endDate | date("d/m/Y")}}</li>
+				  <li class="list-group-item">Nombre de nuits: {{NumberDays}} (prix par nuit:  {{booking.ad.price}}€/nuit)</li>
+				  <li class="list-group-item">Montant total: {{booking.amount}}</li>
+				  <li class="list-group-item">Commentaire: {{booking.comment | default('Aucun commentaire')}}</li>
+			</ul>
+		</div>	
+
+			<h2>Propriétaire</h2>
+				<div class="row">
+					<div class="col-3">
+						<img src="{{booking.ad.author.picture}}">
+					</div>
+
+					<div class="col-9">
+					<a href="{{path('user_show',{'slug':booking.ad.author.slug})}}">
+						Auteur: {{booking.ad.author.firstName}} {{ booking.ad.author.lastName }}
+					</a>	
+						<br>
+						<span class="badge badge-info">{{ booking.ad.author.ads | length }} annonces</span>
+					</div>
+				</div>
+		</div>
+
+		<div class="alert alert-light">
+		<div class="col">
+			<h2>Annonce Réservée</h2>
+			<a href="{{path('ads_show',{'slug':booking.ad.slug})}}">{{booking.ad.title}}</a>
+			<br>
+			<img src="{{booking.ad.coverImage}}">
+			<br><br>
+			{{ booking.ad.content | raw }}
+		</div>
+		</div>
+
+
+	</div>
+
+
+
+
+
+</div>
+
+{% endblock %}

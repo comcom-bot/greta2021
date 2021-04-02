@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdController!{% endblock %}
+
+{% form_theme form with ['ad/collection.html.twig'] %}	
+
+{% block body %}
+
+{% for image in ad.imageUploads %}
+
+	<img id="{{image.id}}" src="{{image.url}}" style="width: 150px">
+{% endfor %}
+
+<div class="container mt-4">
+	
+<h1>Modification de l'annonce {{ad.title}}</h1>
+
+
+{{ form_start(form) }}
+
+{{ form_row(form.tableau_id) }}
+
+{{ form_row(form.title,{'label':false,'attr':{'placeholder':"Titre de l'annonce"}}) }}
+{{ form_row(form.introduction)}}
+{{ form_row(form.content)}}
+{{ form_row(form.coverImage)}}
+{{ form_row(form.rooms,{'attr':{'min':1,'placeholder':"Nombre de chambres(s)"}})}}
+{{ form_row(form.price)}}
+
+{{ form_row(form.images) }}
+<button type="button" class="btn btn-success" id="add_image">Ajouter une image</button><br><br>
+
+{{ form_row(form.file) }}
+
+<button type="submit" class="btn btn-success">Modifier l'annonce</button>
+
+{{ form_end(form) }}
+
+
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+{% block javascripts %}
+<script src="/js/ad.js"></script>
+
+<script>
+	$("img").click(function(event){
+
+		$("#" + event.target.id).remove();
+
+		var precedent = $('#annonce_tableau_id').val();
+
+		$('#annonce_tableau_id').val(precedent + ',' + event.target.id)
+
+	})
+
+
+</script>
+
+
+{% endblock %}
+
+

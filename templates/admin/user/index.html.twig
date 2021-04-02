@@ -1,0 +1,48 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Hello AdminUsersController!{% endblock %}
+
+{% block body %}
+	<table class="table table-danger">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Prénom</th>
+      <th scope="col">email</th>
+      <th scope="col">Annonces</th>
+       <th scope="col">Réservations</th>
+       <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for user in users %}
+   <tr>
+      <th scope="row">{{ loop.index }}</th>
+      <td>{{ user.firstName }}</td>
+      <td>{{ user.lastName}}</td>
+      <td>{{ user.email }}</td>
+      <td><strong>{{ user.ads | length }} annonce(s)</strong></td>
+      <td><strong> {{ user.bookings | length }} réservation(s)</strong></td>
+      <td>
+      	 <a href="" class="btn btn-primary mr-4" data-toggle="tooltip" data-placement="bottom" title="Détail de l'utilisateur"><i class="fas fa-eye"></i></a>
+         <a href="" class="btn btn-primary mr-4" data-toggle="tooltip" data-placement="bottom" title="Editer l'utilisateur"><i class="fas fa-edit"></i></a>
+          <a href="{{ path('admin_user_delete',{'slug':user.slug})}}" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Supprimer l'utilisateur"><i class="fas fa-trash"></i></a>
+
+      </td>
+    </tr>
+
+  {% endfor %}
+ 
+    
+  </tbody>
+</table>
+{% endblock %}
+{% block javascripts %}
+  <script type="text/javascript">
+    $(function () {
+     $('[data-toggle="tooltip"]').tooltip()
+    });
+
+  </script>
+{% endblock %}

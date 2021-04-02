@@ -1,0 +1,21 @@
+<div class="col-4 mb-4">
+
+
+			<div class="card">
+			  <div class="card-header">
+			    {{ad.rooms}} chambres {{ad.price}}€/nuits<br>
+			   {%  include 'partials/rating.html.twig' with {'rating': ad.getAverageRatings} %}
+			  </div>
+			  <div class="card-body">
+			  <img src="{{ad.coverImage}}"> 
+			    <h5 class="card-title">{{ad.title}}</h5>
+			    <p class="card-text">{{ad.introduction | striptags('<p><br><b><img>') | raw }}</p>
+			    <a href="{{path('ads_show',{'slug':ad.slug})}}" class="btn btn-primary example-popover" title="Popover title" data-content="{{ad.title}}">Voir l'annonce</a>
+
+			    {% if app.user and app.user == ad.author %}
+			    <a href="{{path("ads_edit",{'slug':ad.slug})}}" class="btn btn-primary">Modifier l'annonce</a>
+				{% endif %}
+
+			  </div>
+			</div>
+		</div>

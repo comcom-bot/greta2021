@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Hello AdController!{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+	<h1>Mes réservations </h1>
+
+	<div class="alert alert-info">
+	Retrouver toutes vos réservations
+	</div>
+	
+ {% for booking in booker.bookings %}
+<div class="row mb-3">
+	<div class="col">
+		<img src="{{booking.ad.coverImage}}" alt=""/>
+	</div>
+	<div class="col">
+	Réservation N°: {{ booking.id }}<br>
+	du {{ booking.startDate | date('d/m/Y') }} au {{ booking.endDate | date('d/m/Y') }}<br>
+	montant total: {{ booking.amount }} €<br><br>
+
+	<a href="{{path('booking_show',{'id':booking.id})}}">Plus d'info</a>
+	</div>
+
+
+</div>
+ 	
+
+
+
+ {% endfor %}
+ 	
+
+</div>
+
+{% endblock %}
